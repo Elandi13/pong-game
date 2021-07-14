@@ -59,8 +59,8 @@ class Player extends Rect
 {
     constructor()
     {
-        super(20, 100)
-        this.score = 0
+        super(20, 100);
+        this.score = 0;
     }
 }
 
@@ -130,7 +130,7 @@ class Pong
                 const len = ball.vel.len;
                 ball.vel.x =- ball.vel.x;
                 ball.vel.y += 300 * (Math.random() - .5);
-                ball.vel.len *= len * 1.05;
+                ball.vel.len = len * 1.05;
             }
     }
 
@@ -205,7 +205,8 @@ const canvas = document.getElementById('pong');
 const pong = new Pong(canvas)
 
 canvas.addEventListener('mousemove', event => {
-    pong.players[0].pos.y = event.offsetY
+    const scale = event.offsetY / event.target.getBoundingClientRect().height;
+    pong.players[0].pos.y = canvas.height * scale;
 });
 
 canvas.addEventListener('click', event => {
